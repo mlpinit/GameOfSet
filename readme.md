@@ -1,3 +1,6 @@
+Work in progress...
+
+
 This is a basic implementation of the popular game of [Set](https://en.wikipedia.org/wiki/Set_(game\)) using java and leveragin swing for the GUI.
 
 If you want to play the game you can find it under dist 'dist/GameOfSet-\*'.
