@@ -67,7 +67,7 @@ public class CardButton extends JButton {
     }
 
     private URL getDarkImageURL() {
-        return getClass().getResource("/white.png");
+        return getClass().getResource(card.getDarkImageLocation());
     }
 
 }

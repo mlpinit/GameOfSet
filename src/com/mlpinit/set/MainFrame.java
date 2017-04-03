@@ -23,6 +23,7 @@ public class MainFrame extends JFrame {
         this.setLayout(new BorderLayout());
         this.deck = deck;
         this.setSize(600, 720);
+        this.setResizable(false);
         this.setLocationRelativeTo(null);
         this.add(cardsPanel, BorderLayout.CENTER);
         this.add(infoPanel, BorderLayout.SOUTH);
