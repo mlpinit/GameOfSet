@@ -26,6 +26,6 @@ Example: "RSE2L" - This means it's a red card with 2 empty squiggles on it.
 * Handle the unlikely scenario where there is no set in 15 cards.
 * At the end of the game, add a button on the message dialog to allow for a
   restart.
-* Create better looking cards for the game.
+* ~~Create better looking cards for the game.~~
 * Display time it took to finish the game at the end of the game.
 * Allow different players to play the game and collect statistics.
