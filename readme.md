@@ -1,7 +1,7 @@
 # Introduction - Game Of Set
 This is a basic implementation of the popular game of [Set](goo.gl/6qDgv9) using java and the swing GUI.
 
-If you want to play the game you can find the latest compiled version under dist 'dist/GameOfSet-(date)'.
+If you want to play the game you can download it [here](https://github.com/mlpinit/GameOfSet/blob/master/dist/GameOfSet-20170404.jar).
 
 ![Game Of Set Screenshot](/screenshot.png)
 
