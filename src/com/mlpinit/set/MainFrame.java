@@ -44,7 +44,7 @@ public class MainFrame extends JFrame {
             selectedButtons.get(1).card, selectedButtons.get(2).card)) {
             setsCount++;
             refreshCardPanel();
-            if (deck.possibleSets(displayedCards) == 0) {
+            if (deck.possibleSets(displayedCards) == 0 && !deck.hasMoreCards()) {
                 JOptionPane.showMessageDialog(this,
                         "Congratulations! You have finished the game. You found " +
                         setsCount + " sets.");
