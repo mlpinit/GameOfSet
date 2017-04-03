@@ -1,31 +1,42 @@
-Work in progress...
+# Introduction - Game Of Set
+This is a basic implementation of the popular game of [Set](goo.gl/6qDgv9) using java and the swing GUI.
 
+If you want to play the game you can find the latest compiled version under dist 'dist/GameOfSet-(date)'.
 
-This is a basic implementation of the popular game of [Set](goo.gl/6qDgv9) using java and leveragin swing for the GUI.
+![Game Of Set Screenshot](/screenshot.png)
 
-If you want to play the game you can find it under dist 'dist/GameOfSet-\*'.
+Outline:
 
-Pull requests are welcome. Here are some conventions used and a general
-overview of the project: 
+* [Project Dependencies](#project-dependencies)
+* [Pull Requests](#pull-requests)
+* [Scripts](#scripts)
+* [TODO](#todo)
 
-Conventions:
+## Project Dependencies
+ 
+I've used **[ant](http://ant.apache.org/)** for the build process. If you don't have ant and you're on a mac you can install it with homebrew ``brew install ant``. Testing is done using **[JUnit](http://junit.org/junit4/)**. If you have ant installed, it will take care of this dependency for you durring the build/test phases.
 
-The image location of a given card is located under resources and it has the
-following format: "<Color><Shape><Filling><Count><Type>".
+## Pull Requests
 
-Color: R-Red, G-Green, M-Mouve
-Shape: S-Squiggle, D-Diamond, O-Oval
-Filling: E-Empty, S-Stripped, F-Full
-Count: 1, 2, 3
-Type: Dark, Light
+Pull requests are welcome. If you'd like to make a pull requests please add tests and run ``./scripts/test.sh`` to make sure nothing is failing. If something is not clear just ping me and I'd be happy to work with you on getting your feature in.
 
-Example: "RSE2L" - This means it's a red card with 2 empty squiggles on it.
+## Scripts
 
-# TODO:
+There are only two scripts at this point: 
+
+* ``./scripts/test.sh`` - this cleans, compiles and tests.
+* ``./scripts/dist.sh`` - this cleans, compiles and creates an executable under '/dist'.
+
+Check the build.xml file for more details.
+
+## TODO
+
+List of some potentially useful todos:
 
 * Handle the unlikely scenario where there is no set in 15 cards.
 * At the end of the game, add a button on the message dialog to allow for a
   restart.
 * ~~Create better looking cards for the game.~~
-* Display time it took to finish the game at the end of the game.
+* Display the time it took to finish the game at the end of the game.
 * Allow different players to play the game and collect statistics.
+* Introduce a hint feature that highlights a set or parts (one or two cards) of a set.
