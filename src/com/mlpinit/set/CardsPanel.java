@@ -11,7 +11,10 @@ import java.util.ArrayList;
 
 public class CardsPanel extends JPanel {
 
-    public CardsPanel() {
+    private MainFrame mainFrame;
+
+    public CardsPanel(MainFrame frame) {
+        this.mainFrame = frame;
         this.setLayout(new GridBagLayout());
         this.setSize(600, 600);
         this.setBackground(Color.white);
@@ -33,7 +36,7 @@ public class CardsPanel extends JPanel {
             for (int j = 0; j < width; j++) {
                 constraints.gridx = j;
                 constraints.gridy = i;
-                CardButton button = new CardButton(cards.get(cardIndex));
+                CardButton button = new CardButton(cards.get(cardIndex), mainFrame);
                 GridBagLayout gridBagLayout = (GridBagLayout) this.getLayout();
                 gridBagLayout.setConstraints(button, constraints);
                 this.add(button);

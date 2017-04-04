@@ -13,9 +13,11 @@ import java.awt.event.ActionEvent;
 
 public class CardButton extends JButton {
     public Card card;
+    private MainFrame mainFrame;
     private boolean selected;
 
-    public CardButton(Card card) {
+    public CardButton(Card card, MainFrame frame) {
+        this.mainFrame = frame;
         this.card = card;
         this.selected = false;
         this.setIcon(new ImageIcon(getLightImageURL()));
@@ -29,7 +31,7 @@ public class CardButton extends JButton {
                     removeCard();
                 }
                 updateIcon();
-                if (frame().selectedButtons.size() == 3) frame().nextThreeCards();
+                if (mainFrame.selectedButtons.size() == 3) mainFrame.nextThreeCards();
             }
         });
 
@@ -51,15 +53,11 @@ public class CardButton extends JButton {
     }
 
     private void addCard() {
-        frame().selectedButtons.add(this);
+        mainFrame.selectedButtons.add(this);
     }
 
     private void removeCard() {
-        frame().selectedButtons.remove(this);
-    }
-
-    private MainFrame frame() {
-        return (MainFrame) SwingUtilities.getWindowAncestor(this);
+        mainFrame.selectedButtons.remove(this);
     }
 
     private URL getLightImageURL() {

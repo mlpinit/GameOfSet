@@ -20,7 +20,7 @@ public class MainFrame extends JFrame {
 
     public MainFrame(Deck deck) {
         super("Game of Set");
-        this.cardsPanel = new CardsPanel();
+        this.cardsPanel = new CardsPanel(this);
         this.infoPanel = new InfoPanel(this);
         this.setLayout(new BorderLayout());
         this.deck = deck;
