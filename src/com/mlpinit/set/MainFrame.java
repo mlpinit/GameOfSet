@@ -37,16 +37,16 @@ public class MainFrame extends JFrame {
         for (int i = 0; i < START_CARDS; i++) displayedCards.add(deck.nextCard());
         cardsPanel.createDisplay(displayedCards);
         cardsPanel.validate();
-        infoPanel.updatePossibleSetsLabel(deck.possibleSets(displayedCards));
+        infoPanel.updatePossibleSetsLabel(Deck.possibleSets(displayedCards));
     }
 
 
     public void nextThreeCards() {
-        if (deck.isValid(selectedButtons.get(0).card,
+        if (Deck.isValid(selectedButtons.get(0).card,
             selectedButtons.get(1).card, selectedButtons.get(2).card)) {
             setsCount++;
             refreshCardPanel();
-            if (deck.possibleSets(displayedCards) == 0 && !deck.hasMoreCards()) {
+            if (Deck.possibleSets(displayedCards) == 0 && !deck.hasMoreCards()) {
                 JOptionPane.showMessageDialog(this,
                         "Congratulations! You have finished the game. You found " +
                         setsCount + " sets.");
@@ -61,7 +61,7 @@ public class MainFrame extends JFrame {
         selectedButtons.clear();
         cardsPanel.validate();
         cardsPanel.repaint();
-        infoPanel.updatePossibleSetsLabel(deck.possibleSets(displayedCards));
+        infoPanel.updatePossibleSetsLabel(Deck.possibleSets(displayedCards));
         infoPanel.updateSetsCount(setsCount);
     }
 
@@ -70,7 +70,7 @@ public class MainFrame extends JFrame {
             for (int i = 0; i < 3; i++) displayedCards.add(deck.nextCard());
             cardsPanel.createDisplay(displayedCards);
             cardsPanel.validate();
-            infoPanel.updatePossibleSetsLabel(deck.possibleSets(displayedCards));
+            infoPanel.updatePossibleSetsLabel(Deck.possibleSets(displayedCards));
         } else if (!deck.hasMoreCards()) {
             JOptionPane.showMessageDialog(this, "No cards left.");
         } else {

@@ -21,7 +21,7 @@ public class DeckTest {
         Card three = new Card(Color.Red, Shape.Oval, Filling.Empty, 3);
         Deck deck = new Deck();
 
-        assertTrue(deck.isValid(one, two, three));
+        assertTrue(Deck.isValid(one, two, three));
     }
 
     @Test
@@ -31,7 +31,7 @@ public class DeckTest {
         Card five = new Card(Color.Red, Shape.Diamond, Filling.Empty, 1);
         Deck deck = new Deck();
 
-        assertTrue(deck.isValid(one, four, five));
+        assertTrue(Deck.isValid(one, four, five));
     }
 
     @Test
@@ -41,7 +41,7 @@ public class DeckTest {
         Card seven = new Card(Color.Mauve, Shape.Oval, Filling.Empty, 1);
         Deck deck = new Deck();
 
-        assertTrue(deck.isValid(one, six, seven));
+        assertTrue(Deck.isValid(one, six, seven));
     }
 
     @Test
@@ -51,7 +51,7 @@ public class DeckTest {
         Card nine = new Card(Color.Red, Shape.Oval, Filling.Full, 1);
         Deck deck = new Deck();
 
-        assertTrue(deck.isValid(one, eight, nine));
+        assertTrue(Deck.isValid(one, eight, nine));
     }
 
     @Test
@@ -61,7 +61,7 @@ public class DeckTest {
         Card three = new Card(Color.Red, Shape.Oval, Filling.Empty, 2);
         Deck deck = new Deck();
 
-        assertFalse(deck.isValid(one, two, three));
+        assertFalse(Deck.isValid(one, two, three));
     }
 
     @Test
@@ -71,7 +71,7 @@ public class DeckTest {
         Card five = new Card(Color.Red, Shape.Diamond, Filling.Empty, 1);
         Deck deck = new Deck();
 
-        assertFalse(deck.isValid(one, four, five));
+        assertFalse(Deck.isValid(one, four, five));
     }
 
     @Test
@@ -81,7 +81,7 @@ public class DeckTest {
         Card seven = new Card(Color.Green, Shape.Oval, Filling.Empty, 1);
         Deck deck = new Deck();
 
-        assertFalse(deck.isValid(one, six, seven));
+        assertFalse(Deck.isValid(one, six, seven));
     }
 
     @Test
@@ -91,7 +91,7 @@ public class DeckTest {
         Card nine = new Card(Color.Red, Shape.Oval, Filling.Full, 1);
         Deck deck = new Deck();
 
-        assertFalse(deck.isValid(one, eight, nine));
+        assertFalse(Deck.isValid(one, eight, nine));
     }
 
     @Test
@@ -166,7 +166,7 @@ public class DeckTest {
         cards.add(five);
         Deck deck = new Deck();
 
-        assertEquals(2, deck.possibleSets(cards));
+        assertEquals(2, Deck.possibleSets(cards));
     }
 
     @Test

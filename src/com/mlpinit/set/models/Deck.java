@@ -19,6 +19,35 @@ public class Deck {
         return deck;
     }
 
+    // This algorithm avoids the cumbersome use of multiple if statements. The
+    // numValue() function returns a numerical representation of a card.  We
+    // have a valid set only when each attribute of a card is the same on all of
+    // the cards or different on all of the cards. For each attribute, the
+    // summed numerical representation gives a digit divisible by 3 for a valid
+    // set and not divisible by 3 for an invalid set.
+    public static boolean isValid(Card one, Card two, Card three) {
+        int numValueSum = one.numValue() + two.numValue() + three.numValue();
+        while (numValueSum != 0) {
+            if ((numValueSum % 10) % 3 != 0) return false;
+            numValueSum /= 10;
+        }
+        return true;
+    }
+
+    public static int possibleSets(ArrayList<Card> cards) {
+        int possibleSets = 0;
+        for (int i = 0; i < cards.size() - 2; i++) {
+            for (int j = i + 1; j < cards.size() - 1; j++) {
+                for (int k = j + 1; k < cards.size(); k++) {
+                    if (Deck.isValid(cards.get(i), cards.get(j), cards.get(k))) {
+                        possibleSets++;
+                    }
+                }
+            }
+        }
+        return possibleSets;
+    }
+
     // There are a total of 81 cards in a game of set.
     private static final int MAX_CARDS = 81;
 
@@ -38,35 +67,6 @@ public class Deck {
 
     public int size() {
         return size;
-    }
-
-    // This algorithm avoids the cumbersome use of multiple if statements. The
-    // numValue() function returns a numerical representation of a card.  We
-    // have a valid set only when each attribute of a card is the same on all of
-    // the cards or different on all of the cards. For each attribute, the
-    // summed numerical representation gives a digit divisible by 3 for a valid
-    // set and not divisible by 3 for an invalid set.
-    public boolean isValid(Card one, Card two, Card three) {
-        int numValueSum = one.numValue() + two.numValue() + three.numValue();
-        while (numValueSum != 0) {
-            if ((numValueSum % 10) % 3 != 0) return false;
-            numValueSum /= 10;
-        }
-        return true;
-    }
-
-    public int possibleSets(ArrayList<Card> cards) {
-        int possibleSets = 0;
-        for (int i = 0; i < cards.size() - 2; i++) {
-            for (int j = i + 1; j < cards.size() - 1; j++) {
-                for (int k = j + 1; k < cards.size(); k++) {
-                    if (isValid(cards.get(i), cards.get(j), cards.get(k))) {
-                        possibleSets++;
-                    }
-                }
-            }
-        }
-        return possibleSets;
     }
 
     public void shuffle() {
