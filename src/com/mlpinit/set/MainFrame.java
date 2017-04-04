@@ -41,7 +41,7 @@ public class MainFrame extends JFrame {
 
 
     public void nextThreeCards() {
-        if (Deck.isValid(selectedCards.get(0), selectedCards.get(1), selectedCards.get(2))) {
+        if (Deck.isValid(selectedCards)) {
             setsCount++;
             refreshCardPanel();
             if (Deck.possibleSets(displayedCards) == 0 && !deck.hasMoreCards()) {
