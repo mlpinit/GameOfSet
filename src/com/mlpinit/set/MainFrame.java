@@ -77,7 +77,7 @@ public class MainFrame extends JFrame {
     }
 
     public static void main(String[] args) {
-        Deck deck = DeckCreator.generate();
+        Deck deck = Deck.create();
         deck.shuffle();
         MainFrame mainFrame = new MainFrame(deck);
         mainFrame.start();

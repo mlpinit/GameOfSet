@@ -7,7 +7,6 @@ import com.mlpinit.set.Card;
 import com.mlpinit.set.Color;
 import com.mlpinit.set.Filling;
 import com.mlpinit.set.Shape;
-import com.mlpinit.set.DeckCreator;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -143,7 +142,7 @@ public class DeckTest {
 
     @Test
     public void test_cards_are_unique_after_shuffle() {
-        Deck deck = new DeckCreator().generate();
+        Deck deck = Deck.create();
         deck.shuffle();
         Set<Card> set = new HashSet<Card>();
         for (Card card = deck.nextCard(); card != null; card = deck.nextCard()) {
@@ -172,16 +171,32 @@ public class DeckTest {
 
     @Test
     public void test_has_more_cards() {
-        Deck deck = new DeckCreator().generate();
+        Deck deck = Deck.create();
         
         assertTrue(deck.hasMoreCards());
     }
 
     @Test
     public void test_does_not_have_more_cards() {
-        Deck deck = new DeckCreator().generate();
+        Deck deck = Deck.create();
         for (int i = 0; i < 81; i++) deck.nextCard();
         
         assertFalse(deck.hasMoreCards());
+    }
+
+    @Test
+    public void test_create() {
+        Deck deck = Deck.create();
+        assertEquals(81, deck.size());
+    }
+
+    @Test
+    public void test_create_unique_cards() {
+        Deck deck = Deck.create();
+        Set<Card> set = new HashSet<Card>();
+        for (Card card = deck.nextCard(); card != null; card = deck.nextCard()) {
+            set.add(card);
+        }
+        assertEquals(set.size(), deck.size());
     }
 }
