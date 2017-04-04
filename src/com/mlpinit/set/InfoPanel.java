@@ -42,7 +42,7 @@ public class InfoPanel extends JPanel {
         gridBagLayout.setConstraints(possibleSetsLabel, constraints);
         this.add(setsCountLabel);
         //
-        constraints.weighty = 3;
+        constraints.weighty = 50;
         constraints.gridx = 0;
         constraints.gridy = 2;
         this.threeMoreButton = new JButton("Add Three More");

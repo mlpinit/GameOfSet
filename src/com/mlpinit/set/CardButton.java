@@ -19,7 +19,7 @@ public class CardButton extends JButton {
         this.card = card;
         this.selected = false;
         this.setIcon(new ImageIcon(getLightImageURL()));
-        this.setBorder(BorderFactory.createLineBorder(Color.black, 5));
+        this.setBorder(BorderFactory.createLineBorder(Color.gray, 5));
         this.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 selected = !selected;

@@ -5,6 +5,8 @@ import java.awt.Color;
 import java.awt.GridBagConstraints;
 
 import javax.swing.JPanel;
+import javax.swing.BorderFactory;
+
 import java.util.ArrayList;
 
 public class CardsPanel extends JPanel {
@@ -13,6 +15,7 @@ public class CardsPanel extends JPanel {
         this.setLayout(new GridBagLayout());
         this.setSize(600, 600);
         this.setBackground(Color.white);
+        this.setBorder(BorderFactory.createLineBorder(Color.gray, 5));
     }
 
     public void createDisplay(ArrayList<Card> cards) {
