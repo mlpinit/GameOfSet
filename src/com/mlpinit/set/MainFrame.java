@@ -10,8 +10,8 @@ import java.util.ArrayList;
 public class MainFrame extends JFrame {
 
     private final int START_CARDS = 12;
-    private final CardsPanel cardsPanel = new CardsPanel();
-    private final InfoPanel infoPanel = new InfoPanel();
+    private final CardsPanel cardsPanel;
+    private final InfoPanel infoPanel;
 
     private final Deck deck;
     private int setsCount = 0;
@@ -20,6 +20,8 @@ public class MainFrame extends JFrame {
 
     public MainFrame(Deck deck) {
         super("Game of Set");
+        this.cardsPanel = new CardsPanel();
+        this.infoPanel = new InfoPanel(this);
         this.setLayout(new BorderLayout());
         this.deck = deck;
         this.setSize(600, 720);

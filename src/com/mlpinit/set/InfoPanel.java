@@ -19,8 +19,11 @@ public class InfoPanel extends JPanel {
     private JLabel possibleSetsLabel;
     private JLabel setsCountLabel;
     private JButton threeMoreButton;
+    private MainFrame mainFrame;
 
-    public InfoPanel() {
+    public InfoPanel(MainFrame frame) {
+        this.mainFrame = frame;
+
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.anchor = GridBagConstraints.FIRST_LINE_START;
         constraints.weightx = 1;
@@ -41,7 +44,6 @@ public class InfoPanel extends JPanel {
         constraints.gridy = 1;
         gridBagLayout.setConstraints(possibleSetsLabel, constraints);
         this.add(setsCountLabel);
-        //
         constraints.weighty = 50;
         constraints.gridx = 0;
         constraints.gridy = 2;
@@ -49,7 +51,7 @@ public class InfoPanel extends JPanel {
         gridBagLayout.setConstraints(threeMoreButton, constraints);
         threeMoreButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                frame().addThreeMoreCards();
+                frame.addThreeMoreCards();
             }
         });
         this.add(threeMoreButton);
@@ -85,7 +87,4 @@ public class InfoPanel extends JPanel {
         return label;
     }
 
-    private MainFrame frame() {
-        return (MainFrame) SwingUtilities.getWindowAncestor(this);
-    }
 }
