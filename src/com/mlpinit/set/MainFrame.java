@@ -63,7 +63,6 @@ public class MainFrame extends JFrame {
         if (displayedCards.size() == 12 && deck.hasMoreCards()) {
             for (int i = 0; i < 3; i++) displayedCards.add(deck.nextCard());
             cardsPanel.createDisplay(displayedCards);
-            cardsPanel.validate();
             infoPanel.updatePossibleSetsLabel(Deck.possibleSets(displayedCards));
         } else if (!deck.hasMoreCards()) {
             JOptionPane.showMessageDialog(this, "No cards left.");
