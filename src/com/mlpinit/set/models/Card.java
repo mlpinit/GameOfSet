@@ -5,6 +5,7 @@ public class Card {
     private Filling filling;
     private Color color;
     private int count;
+    private boolean selected;
     private String darkImageLocation;
     private String lightImageLocation;
 
@@ -13,8 +14,13 @@ public class Card {
         this.color = color;
         this.filling = filling;
         this.count = count;
+        this.selected = false;
         this.darkImageLocation = toString() + "D" + ".png";
         this.lightImageLocation = toString() + "L" + ".png";
+    }
+
+    public String getImageLocation() {
+        return selected ? darkImageLocation : lightImageLocation;
     }
 
     public String getDarkImageLocation() {
@@ -34,6 +40,14 @@ public class Card {
         return value;
     }
 
+    public void toggleSelected() {
+        this.selected = !selected;
+    }
+
+    public boolean getSelected() {
+        return selected;
+    }
+
     public String toString() {
         StringBuilder sb = new StringBuilder(5);
         sb.append("/");
@@ -43,6 +57,5 @@ public class Card {
         sb.append(count);
         return sb.toString();
     }
-
 
 }

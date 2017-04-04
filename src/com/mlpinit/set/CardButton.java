@@ -20,52 +20,24 @@ public class CardButton extends JButton {
         this.mainFrame = frame;
         this.card = card;
         this.selected = false;
-        this.setIcon(new ImageIcon(getLightImageURL()));
+        this.setIcon(new ImageIcon(getImageURL()));
         this.setBorder(BorderFactory.createLineBorder(Color.gray, 5));
         this.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                selected = !selected;
-                if (selected) {
-                    addCard();
+                card.toggleSelected();
+                if (card.getSelected()) {
+                    mainFrame.selectedCards.add(card);
                 } else {
-                    removeCard();
+                    mainFrame.selectedCards.remove(card);
                 }
-                updateIcon();
-                if (mainFrame.selectedButtons.size() == 3) mainFrame.nextThreeCards();
+                setIcon(new ImageIcon(getImageURL()));
+                if (mainFrame.selectedCards.size() == 3) mainFrame.nextThreeCards();
             }
         });
-
     }
 
-    public void updateIcon() {
-        if (selected) {
-            setIcon(new ImageIcon(getDarkImageURL()));
-        } else {
-            setIcon(new ImageIcon(getLightImageURL()));
-        }
-    }
-    public void unselect() {
-        this.selected = false;
-    }
-
-    public Card getCard() {
-        return card;
-    }
-
-    private void addCard() {
-        mainFrame.selectedButtons.add(this);
-    }
-
-    private void removeCard() {
-        mainFrame.selectedButtons.remove(this);
-    }
-
-    private URL getLightImageURL() {
-        return getClass().getResource(card.getLightImageLocation());
-    }
-
-    private URL getDarkImageURL() {
-        return getClass().getResource(card.getDarkImageLocation());
+    private URL getImageURL() {
+        return getClass().getResource(card.getImageLocation());
     }
 
 }

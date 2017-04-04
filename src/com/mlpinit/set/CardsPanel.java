@@ -43,6 +43,8 @@ public class CardsPanel extends JPanel {
                 cardIndex++;
             }
         }
+        this.validate();
+        this.repaint();
     }
 
 }
