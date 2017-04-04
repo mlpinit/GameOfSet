@@ -52,11 +52,10 @@ public class MainFrame extends JFrame {
             infoPanel.updatePossibleSetsLabel(Deck.possibleSets(displayedCards));
             infoPanel.updateSetsCount(setsCount);
         } else {
-            for (Card card : selectedCards) card.toggleSelected();
             JOptionPane.showMessageDialog(this, "That is not a valid set.");
         }
-        cardsPanel.createDisplay(displayedCards);
         selectedCards.clear();
+        cardsPanel.createDisplay(displayedCards);
     }
 
     public void addThreeMoreCards() {
