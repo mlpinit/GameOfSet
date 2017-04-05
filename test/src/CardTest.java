@@ -2,6 +2,7 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
 import com.mlpinit.set.Card;
+import com.mlpinit.set.Deck;
 import com.mlpinit.set.Color;
 import com.mlpinit.set.Filling;
 import com.mlpinit.set.Shape;
@@ -11,7 +12,7 @@ public class CardTest {
     private Card card;
 
     public CardTest() {
-        card = new Card(Color.Red, Shape.Oval, Filling.Empty, 2);
+        card = new Card(Color.Red, Shape.Oval, Filling.Empty, 2, new Deck());
     }
 
     @Test

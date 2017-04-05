@@ -1,24 +1,31 @@
 package com.mlpinit.set;
 
+import java.net.URL;
+
 public class Card {
+    private Deck deck;
     private Shape shape;
     private Filling filling;
     private Color color;
     private int count;
+    private boolean selected;
     private String darkImageLocation;
     private String lightImageLocation;
 
-    public Card(Color color, Shape shape, Filling filling, int count) {
+    public Card(Color color, Shape shape, Filling filling, int count, Deck deck) {
+        this.deck = deck;
         this.shape = shape;
         this.color = color;
         this.filling = filling;
         this.count = count;
+        this.selected = false;
         this.darkImageLocation = toString() + "D" + ".png";
         this.lightImageLocation = toString() + "L" + ".png";
     }
 
-    public String getImageLocation(boolean selected) {
-        return selected ? darkImageLocation : lightImageLocation;
+
+    public URL getImageURL() {
+        return getClass().getResource(getImageLocation());
     }
 
     public String getDarkImageLocation() {
@@ -38,6 +45,14 @@ public class Card {
         return value;
     }
 
+    public void toggleSelection() {
+        this.selected = !selected;
+    }
+
+    public boolean getSelected() {
+        return selected;
+    }
+
     public String toString() {
         StringBuilder sb = new StringBuilder(5);
         sb.append("/");
@@ -46,6 +61,10 @@ public class Card {
         sb.append(filling.initial());
         sb.append(count);
         return sb.toString();
+    }
+
+    private String getImageLocation() {
+        return selected ? darkImageLocation : lightImageLocation;
     }
 
 }

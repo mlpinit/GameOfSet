@@ -15,83 +15,83 @@ import java.util.ArrayList;
 public class DeckTest {
     @Test
     public void test_is_valid_all_different_count() {
-        Card one = new Card(Color.Red, Shape.Oval, Filling.Empty, 1);
-        Card two = new Card(Color.Red, Shape.Oval, Filling.Empty, 2);
-        Card three = new Card(Color.Red, Shape.Oval, Filling.Empty, 3);
         Deck deck = new Deck();
+        Card one = new Card(Color.Red, Shape.Oval, Filling.Empty, 1, deck);
+        Card two = new Card(Color.Red, Shape.Oval, Filling.Empty, 2, deck);
+        Card three = new Card(Color.Red, Shape.Oval, Filling.Empty, 3, deck);
         assertTrue(deck.isValid(one, two, three));
     }
 
     @Test
     public void test_is_valid_all_different_shape() {
-        Card one = new Card(Color.Red, Shape.Oval, Filling.Empty, 1);
-        Card four = new Card(Color.Red, Shape.Squiggle, Filling.Empty, 1);
-        Card five = new Card(Color.Red, Shape.Diamond, Filling.Empty, 1);
         Deck deck = new Deck();
+        Card one = new Card(Color.Red, Shape.Oval, Filling.Empty, 1, deck);
+        Card four = new Card(Color.Red, Shape.Squiggle, Filling.Empty, 1, deck);
+        Card five = new Card(Color.Red, Shape.Diamond, Filling.Empty, 1, deck);
         assertTrue(deck.isValid(one, four, five));
     }
 
     @Test
     public void test_is_valid_all_different_color() {
-        Card one = new Card(Color.Red, Shape.Oval, Filling.Empty, 1);
-        Card six = new Card(Color.Green, Shape.Oval, Filling.Empty, 1);
-        Card seven = new Card(Color.Mauve, Shape.Oval, Filling.Empty, 1);
         Deck deck = new Deck();
+        Card one = new Card(Color.Red, Shape.Oval, Filling.Empty, 1, deck);
+        Card six = new Card(Color.Green, Shape.Oval, Filling.Empty, 1, deck);
+        Card seven = new Card(Color.Mauve, Shape.Oval, Filling.Empty, 1, deck);
         assertTrue(deck.isValid(one, six, seven));
     }
 
     @Test
     public void test_is_valid_all_different_filling() {
-        Card one = new Card(Color.Red, Shape.Oval, Filling.Empty, 1);
-        Card eight = new Card(Color.Red, Shape.Oval, Filling.Striped, 1);
-        Card nine = new Card(Color.Red, Shape.Oval, Filling.Full, 1);
         Deck deck = new Deck();
+        Card one = new Card(Color.Red, Shape.Oval, Filling.Empty, 1, deck);
+        Card eight = new Card(Color.Red, Shape.Oval, Filling.Striped, 1, deck);
+        Card nine = new Card(Color.Red, Shape.Oval, Filling.Full, 1, deck);
         assertTrue(deck.isValid(one, eight, nine));
     }
 
     @Test
     public void test_is_not_valid_count() {
-        Card one = new Card(Color.Red, Shape.Oval, Filling.Empty, 1);
-        Card two = new Card(Color.Red, Shape.Oval, Filling.Empty, 2);
-        Card three = new Card(Color.Red, Shape.Oval, Filling.Empty, 2);
         Deck deck = new Deck();
+        Card one = new Card(Color.Red, Shape.Oval, Filling.Empty, 1, deck);
+        Card two = new Card(Color.Red, Shape.Oval, Filling.Empty, 2, deck);
+        Card three = new Card(Color.Red, Shape.Oval, Filling.Empty, 2, deck);
         assertFalse(deck.isValid(one, two, three));
     }
 
     @Test
     public void test_is_not_valid_shape() {
-        Card one = new Card(Color.Red, Shape.Oval, Filling.Empty, 1);
-        Card four = new Card(Color.Red, Shape.Diamond, Filling.Empty, 1);
-        Card five = new Card(Color.Red, Shape.Diamond, Filling.Empty, 1);
         Deck deck = new Deck();
+        Card one = new Card(Color.Red, Shape.Oval, Filling.Empty, 1, deck);
+        Card four = new Card(Color.Red, Shape.Diamond, Filling.Empty, 1, deck);
+        Card five = new Card(Color.Red, Shape.Diamond, Filling.Empty, 1, deck);
         assertFalse(deck.isValid(one, four, five));
     }
 
     @Test
     public void test_is_not_valid_color() {
-        Card one = new Card(Color.Red, Shape.Oval, Filling.Empty, 1);
-        Card six = new Card(Color.Green, Shape.Oval, Filling.Empty, 1);
-        Card seven = new Card(Color.Green, Shape.Oval, Filling.Empty, 1);
         Deck deck = new Deck();
+        Card one = new Card(Color.Red, Shape.Oval, Filling.Empty, 1, deck);
+        Card six = new Card(Color.Green, Shape.Oval, Filling.Empty, 1, deck);
+        Card seven = new Card(Color.Green, Shape.Oval, Filling.Empty, 1, deck);
         assertFalse(deck.isValid(one, six, seven));
     }
 
     @Test
     public void test_is_not_valid_filling() {
-        Card one = new Card(Color.Red, Shape.Oval, Filling.Empty, 1);
-        Card eight = new Card(Color.Red, Shape.Oval, Filling.Full, 1);
-        Card nine = new Card(Color.Red, Shape.Oval, Filling.Full, 1);
         Deck deck = new Deck();
+        Card one = new Card(Color.Red, Shape.Oval, Filling.Empty, 1, deck);
+        Card eight = new Card(Color.Red, Shape.Oval, Filling.Full, 1, deck);
+        Card nine = new Card(Color.Red, Shape.Oval, Filling.Full, 1, deck);
         assertFalse(deck.isValid(one, eight, nine));
     }
 
     @Test
 
     public void test_add_card() {
-        Card one = new Card(Color.Red, Shape.Oval, Filling.Empty, 1);
-        Card eight = new Card(Color.Red, Shape.Oval, Filling.Full, 1);
-        Card nine = new Card(Color.Red, Shape.Oval, Filling.Full, 1);
         Deck deck = new Deck();
+        Card one = new Card(Color.Red, Shape.Oval, Filling.Empty, 1, deck);
+        Card eight = new Card(Color.Red, Shape.Oval, Filling.Full, 1, deck);
+        Card nine = new Card(Color.Red, Shape.Oval, Filling.Full, 1, deck);
         deck.add(one);
         assertEquals(1, deck.size());
         deck.add(eight);
@@ -102,10 +102,10 @@ public class DeckTest {
 
     @Test
     public void test_shuffle() {
-        Card one = new Card(Color.Red, Shape.Oval, Filling.Empty, 1);
-        Card eight = new Card(Color.Red, Shape.Oval, Filling.Full, 1);
-        Card nine = new Card(Color.Red, Shape.Oval, Filling.Full, 1);
         Deck deck = new Deck();
+        Card one = new Card(Color.Red, Shape.Oval, Filling.Empty, 1, deck);
+        Card eight = new Card(Color.Red, Shape.Oval, Filling.Full, 1, deck);
+        Card nine = new Card(Color.Red, Shape.Oval, Filling.Full, 1, deck);
         deck.add(one);
         deck.add(eight);
         deck.add(nine);
@@ -119,7 +119,7 @@ public class DeckTest {
     public void test_next_card() {
         Deck deck = new Deck();
         assertEquals(null, deck.nextCard());
-        Card one = new Card(Color.Red, Shape.Oval, Filling.Empty, 1);
+        Card one = new Card(Color.Red, Shape.Oval, Filling.Empty, 1, deck);
         deck.add(one);
         assertEquals(one, deck.nextCard());
     }
@@ -138,11 +138,11 @@ public class DeckTest {
     @Test
     public void test_possible_sets() {
         Deck deck = new Deck();
-        Card one = new Card(Color.Red, Shape.Oval, Filling.Empty, 1);
-        Card two = new Card(Color.Red, Shape.Oval, Filling.Empty, 2);
-        Card three = new Card(Color.Red, Shape.Oval, Filling.Empty, 3);
-        Card four = new Card(Color.Red, Shape.Oval, Filling.Striped, 2);
-        Card five = new Card(Color.Red, Shape.Oval, Filling.Full, 2);
+        Card one = new Card(Color.Red, Shape.Oval, Filling.Empty, 1, deck);
+        Card two = new Card(Color.Red, Shape.Oval, Filling.Empty, 2, deck);
+        Card three = new Card(Color.Red, Shape.Oval, Filling.Empty, 3, deck);
+        Card four = new Card(Color.Red, Shape.Oval, Filling.Striped, 2, deck);
+        Card five = new Card(Color.Red, Shape.Oval, Filling.Full, 2, deck);
         ArrayList<Card> cards = deck.getFlippedCards();
         cards.add(one);
         cards.add(two);
@@ -190,27 +190,18 @@ public class DeckTest {
     }
 
     @Test
-    public void test_is_selected() {
-        Deck deck = Deck.create();
-        Card card = deck.nextCard();
-        assertFalse(deck.isSelected(card));
-        deck.updateSelectionStatus(card);
-        assertTrue(deck.isSelected(card));
-
-    }
-
-    @Test
     public void test_incomplete_set() {
         Deck deck = Deck.create();
-        Card card1 = deck.nextCard();
-        Card card2 = deck.nextCard();
-        Card card3 = deck.nextCard();
+        deck.populateFlippedCards();
+        Card card1 = deck.getFlippedCards().get(0);
+        Card card2 = deck.getFlippedCards().get(1);
+        Card card3 = deck.getFlippedCards().get(2);
         assertTrue(deck.incompleteSet());
-        deck.updateSelectionStatus(card1);
+        card1.toggleSelection();
         assertTrue(deck.incompleteSet());
-        deck.updateSelectionStatus(card2);
+        card2.toggleSelection();
         assertTrue(deck.incompleteSet());
-        deck.updateSelectionStatus(card3);
+        card3.toggleSelection();
         assertFalse(deck.incompleteSet());
     }
 
@@ -237,7 +228,7 @@ public class DeckTest {
         deck.populateFlippedCards();
         ArrayList<Card> flippedCards = new ArrayList<Card>();
         for (Card card : deck.getFlippedCards()) flippedCards.add(card);
-        for (int i = 0; i < 3; i++) deck.updateSelectionStatus(flippedCards.get(i));
+        for (int i = 0; i < 3; i++) flippedCards.get(i).toggleSelection();
         deck.flipCards();
         assertTrue(deck.incompleteSet()); // test selected was cleared
         assertEquals(1, deck.getSetsCount()); // test sets count was increased
@@ -258,12 +249,11 @@ public class DeckTest {
        deck.populateFlippedCards();
        deck.flipThreeMoreCards();
        ArrayList<Card> flippedCards = deck.getFlippedCards();
-       for (int i = 0; i < 3; i++) deck.updateSelectionStatus(flippedCards.get(i));
+       for (int i = 0; i < 3; i++) flippedCards.get(i).toggleSelection();
        assertEquals(15, deck.getFlippedCards().size());
        deck.flipCards();
        assertTrue(deck.incompleteSet()); // test selected was cleared
        assertEquals(1, deck.getSetsCount()); // test sets count was increased
        assertEquals(12, deck.getFlippedCards().size());
    }
-
 }

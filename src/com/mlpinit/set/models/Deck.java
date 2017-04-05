@@ -5,7 +5,6 @@ import java.util.ArrayList;
 
 public class Deck {
     private ArrayList<Card> flippedCards = new ArrayList<Card>(16);
-    private ArrayList<Card> selectedCards = new ArrayList<Card>(3);
 
     private static final int MAX_CARDS = 81; // 81 cards in a game of set.
     private final int START_CARDS = 12; // 12 cards flipped in the first round.
@@ -21,7 +20,7 @@ public class Deck {
             for (Shape shape : Shape.values()) {
                 for (Filling filling : Filling.values()) {
                     for (int count = 1; count <= 3; count++) {
-                        deck.add(new Card(color, shape, filling, count));
+                        deck.add(new Card(color, shape, filling, count, deck));
                     }
                 }
             }
@@ -53,7 +52,7 @@ public class Deck {
     }
 
     public void clearSelected() {
-        selectedCards.clear();
+        for (Card card : getSelectedCards()) card.toggleSelection();
     }
 
     public void shuffle() {
@@ -101,28 +100,19 @@ public class Deck {
     public void flipCards() {
         setsCount++;
         if (flippedCards.size() == 12 && this.hasMoreCards()) {
-            for (Card card : selectedCards) {
+            for (Card card : getSelectedCards()) {
                 int cardIndex = flippedCards.indexOf(card);
                 flippedCards.set(cardIndex, nextCard());
             }
         } else {
-            for (Card card : selectedCards) {
+            for (Card card : getSelectedCards()) {
                 flippedCards.remove(card);
             }
         }
-        selectedCards.clear();
     }
 
     public void flipThreeMoreCards() {
         for (int i = 0; i < 3; i++) flippedCards.add(nextCard());
-    }
-
-    public void updateSelectionStatus(Card card) {
-        if (selectedCards.contains(card)) {
-            selectedCards.remove(card);
-        } else {
-            selectedCards.add(card);
-        }
     }
 
     // This algorithm avoids the cumbersome use of multiple if statements. The
@@ -150,7 +140,7 @@ public class Deck {
     }
 
     public boolean isValid() {
-        return isValid(selectedCards);
+        return isValid(getSelectedCards());
     }
 
     public boolean gameEnded() {
@@ -161,11 +151,15 @@ public class Deck {
         return flippedCards.size() == 15;
     }
 
-    public boolean isSelected(Card card) {
-        return selectedCards.contains(card);
+    public boolean incompleteSet() {
+        return getSelectedCards().size() != 3;
     }
 
-    public boolean incompleteSet() {
-        return selectedCards.size() != 3;
+    private ArrayList<Card> getSelectedCards() {
+        ArrayList<Card> cards = new ArrayList<Card>();
+        for (Card card : flippedCards) {
+            if (card.getSelected()) cards.add(card);
+        }
+        return cards;
     }
 }
