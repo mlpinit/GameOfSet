@@ -51,7 +51,7 @@ public class InfoPanel extends JPanel {
         gridBagLayout.setConstraints(threeMoreButton, constraints);
         threeMoreButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                frame.addThreeMoreCards();
+                frame.flipThreeMoreCards();
             }
         });
         this.add(threeMoreButton);

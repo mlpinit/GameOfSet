@@ -9,14 +9,12 @@ import java.util.ArrayList;
 
 public class MainFrame extends JFrame {
 
-    private final int START_CARDS = 12;
+    private final String endGameMessage = "Congratulations! You have finished the game!";
+    private final String invalidSetWarning = "That is not a valid set.";
     private final CardsPanel cardsPanel;
     private final InfoPanel infoPanel;
 
-    private final Deck deck;
-    private int setsCount = 0;
-    private ArrayList<Card> displayedCards = new ArrayList<Card>(16);
-    public ArrayList<Card> selectedCards = new ArrayList<Card>(3);
+    public final Deck deck;
 
     public MainFrame(Deck deck) {
         super("Game of Set");
@@ -31,64 +29,44 @@ public class MainFrame extends JFrame {
         this.add(infoPanel, BorderLayout.SOUTH);
         this.setVisible(true);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-    }
 
-    public void start() {
-        for (int i = 0; i < START_CARDS; i++) displayedCards.add(deck.nextCard());
-        cardsPanel.createDisplay(displayedCards);
-        infoPanel.updatePossibleSetsLabel(Deck.possibleSets(displayedCards));
+        deck.populateFlippedCards();
+        cardsPanel.updateDisplay(deck.getFlippedCards());
+        infoPanel.updatePossibleSetsLabel(deck.getPossibleSetsCount());
     }
-
 
     public void nextThreeCards() {
-        if (Deck.isValid(selectedCards)) {
-            setsCount++;
-            refreshCardPanel();
-            if (Deck.possibleSets(displayedCards) == 0 && !deck.hasMoreCards()) {
-                JOptionPane.showMessageDialog(this,
-                        "Congratulations! You have finished the game. You found " +
-                        setsCount + " sets.");
+        // only attempt to flip cards when a set is selected
+        if (deck.incompleteSet()) return;
+        if (deck.isValid()) {
+            deck.flipCards();
+            infoPanel.updatePossibleSetsLabel(deck.getPossibleSetsCount());
+            infoPanel.updateSetsCount(deck.getSetsCount());
+            if (deck.gameEnded()) {
+                JOptionPane.showMessageDialog(this, endGameMessage);
             }
-            infoPanel.updatePossibleSetsLabel(Deck.possibleSets(displayedCards));
-            infoPanel.updateSetsCount(setsCount);
         } else {
-            JOptionPane.showMessageDialog(this, "That is not a valid set.");
+            JOptionPane.showMessageDialog(this, invalidSetWarning);
+            deck.clearSelected();
         }
-        selectedCards.clear();
-        cardsPanel.createDisplay(displayedCards);
+        cardsPanel.updateDisplay(deck.getFlippedCards());
     }
 
-    public void addThreeMoreCards() {
-        if (displayedCards.size() == 12 && deck.hasMoreCards()) {
-            for (int i = 0; i < 3; i++) displayedCards.add(deck.nextCard());
-            cardsPanel.createDisplay(displayedCards);
-            infoPanel.updatePossibleSetsLabel(Deck.possibleSets(displayedCards));
-        } else if (!deck.hasMoreCards()) {
+    public void flipThreeMoreCards() {
+        if (!deck.hasMoreCards()) {
             JOptionPane.showMessageDialog(this, "No cards left.");
-        } else {
+        } else if (deck.cardFlippingNotAllowed()) {
             JOptionPane.showMessageDialog(this, "Maximum 15 cards at a time.");
+        } else {
+            deck.flipThreeMoreCards();
+            cardsPanel.updateDisplay(deck.getFlippedCards());
+            infoPanel.updatePossibleSetsLabel(deck.getPossibleSetsCount());
         }
     }
 
     public static void main(String[] args) {
         Deck deck = Deck.create();
         deck.shuffle();
-        MainFrame mainFrame = new MainFrame(deck);
-        mainFrame.start();
+        new MainFrame(deck);
     }
-
-    private void refreshCardPanel() {
-        if (displayedCards.size() == 12 && deck.hasMoreCards()) {
-            for (Card card : selectedCards) {
-                int cardIndex = displayedCards.indexOf(card);
-                Card nextCard = deck.nextCard();
-                displayedCards.set(cardIndex, nextCard);
-            }
-        } else {
-            for (Card card : selectedCards) {
-                displayedCards.remove(card);
-            }
-        }
-    }
-
 }

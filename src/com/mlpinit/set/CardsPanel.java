@@ -21,7 +21,7 @@ public class CardsPanel extends JPanel {
         this.setBorder(BorderFactory.createLineBorder(Color.gray, 5));
     }
 
-    public void createDisplay(ArrayList<Card> cards) {
+    public void updateDisplay(ArrayList<Card> cards) {
         this.removeAll();
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.anchor = GridBagConstraints.FIRST_LINE_START;

@@ -24,19 +24,15 @@ public class CardButton extends JButton {
         this.setBorder(BorderFactory.createLineBorder(Color.gray, 5));
         this.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                if (mainFrame.selectedCards.contains(card)) {
-                    mainFrame.selectedCards.remove(card);
-                } else {
-                    mainFrame.selectedCards.add(card);
-                }
+                mainFrame.deck.updateSelectionStatus(card);
                 setIcon(new ImageIcon(getImageURL()));
-                if (mainFrame.selectedCards.size() == 3) mainFrame.nextThreeCards();
+                mainFrame.nextThreeCards();
             }
         });
     }
 
     private URL getImageURL() {
-        return getClass().getResource(card.getImageLocation(mainFrame.selectedCards.contains(card)));
+        return getClass().getResource(
+                card.getImageLocation(mainFrame.deck.isSelected(card)));
     }
-
 }
