@@ -38,5 +38,8 @@ List of some potentially useful todos:
   restart.
 * ~~Create better looking cards for the game.~~
 * Display the time it took to finish the game at the end of the game.
+* Pause button
 * Allow different players to play the game and collect statistics.
-* Introduce a hint feature that highlights a set or parts (one or two cards) of a set.
+* ~~Introduce a hint feature that highlights a set or parts (one or two cards) of a set.~~
+* Display how many cards there are left in the Info Panel
+* Introduce a description for the rules of the game

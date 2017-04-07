@@ -19,6 +19,7 @@ public class InfoPanel extends JPanel {
     private JLabel possibleSetsLabel;
     private JLabel setsCountLabel;
     private JButton threeMoreButton;
+    private JButton hintButton;
     private MainFrame mainFrame;
 
     public InfoPanel(MainFrame frame) {
@@ -33,28 +34,25 @@ public class InfoPanel extends JPanel {
         GridBagLayout gridBagLayout = new GridBagLayout(); 
         this.setLayout(gridBagLayout);
         this.setBackground(Color.gray);
-        this.setPreferredSize(new Dimension(600, 120));
+        this.setPreferredSize(new Dimension(600, 160));
         this.possibleSetsLabel = createPossibleSetsJLabel();
         this.setsCountLabel = createSetsCountLabel();
         constraints.gridx = 0;
         constraints.gridy = 0;
         gridBagLayout.setConstraints(setsCountLabel, constraints);
         this.add(possibleSetsLabel);
-        constraints.gridx = 0;
         constraints.gridy = 1;
         gridBagLayout.setConstraints(possibleSetsLabel, constraints);
         this.add(setsCountLabel);
-        constraints.weighty = 50;
-        constraints.gridx = 0;
+        constraints.weighty = 2;
         constraints.gridy = 2;
-        this.threeMoreButton = new JButton("ADD");
+        this.threeMoreButton = createAddButton();
         gridBagLayout.setConstraints(threeMoreButton, constraints);
-        threeMoreButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                frame.flipThreeMoreCards();
-            }
-        });
         this.add(threeMoreButton);
+        constraints.gridy = 3;
+        this.hintButton = createHintButton();
+        gridBagLayout.setConstraints(hintButton, constraints);
+        this.add(hintButton);
     }
 
     public void updatePossibleSetsLabel(int possibleSets) {
@@ -87,4 +85,22 @@ public class InfoPanel extends JPanel {
         return label;
     }
 
+    private JButton createAddButton() {
+        JButton button = new JButton("ADD");
+        button.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                mainFrame.flipThreeMoreCards();
+            }
+        });
+        return button;
+    }
+    private JButton createHintButton() {
+        JButton button = new JButton("HINT");
+        button.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                mainFrame.showHint();
+            }
+        });
+        return button;
+    }
 }

@@ -1,11 +1,18 @@
 package com.mlpinit.set;
-
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.SwingWorker;
+import javax.swing.Timer;
 
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 import java.awt.BorderLayout;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+import java.lang.Thread;
 
 public class MainFrame extends JFrame {
 
@@ -13,6 +20,8 @@ public class MainFrame extends JFrame {
     private final String invalidSetWarning = "That is not a valid set.";
     private final CardsPanel cardsPanel;
     private final InfoPanel infoPanel;
+
+    private Timer timer;
 
     public final Deck deck;
 
@@ -22,7 +31,7 @@ public class MainFrame extends JFrame {
         this.infoPanel = new InfoPanel(this);
         this.setLayout(new BorderLayout());
         this.deck = deck;
-        this.setSize(600, 720);
+        this.setSize(600, 780);
         this.setResizable(false);
         this.setLocationRelativeTo(null);
         this.add(cardsPanel, BorderLayout.CENTER);
@@ -64,9 +73,39 @@ public class MainFrame extends JFrame {
         }
     }
 
+    public void showHint() {
+        if (deck.getPossibleSetsCount() == 0) {
+            JOptionPane.showMessageDialog(this, "No sets available.");
+        } else {
+            deck.clearSelected();
+            ArrayList<Card> cards = deck.getPossibleSet();
+            ActionListener action = new ActionListener()
+            {   
+                @Override
+                public void actionPerformed(ActionEvent event)
+                {
+                    timer.stop();
+                    updateHintDisplay(cards);
+                }
+            };
+            timer = new Timer(500, action);
+            timer.setRepeats(false);
+            timer.start();
+            updateHintDisplay(cards);
+        }
+    }
+
     public static void main(String[] args) {
         Deck deck = Deck.create();
         deck.shuffle();
         new MainFrame(deck);
     }
+
+    private void updateHintDisplay(ArrayList<Card> cards) {
+        for (Card card : cards) {
+            card.toggleSelection();
+            cardsPanel.updateDisplay(deck.getFlippedCards());
+        }
+    }
+
 }

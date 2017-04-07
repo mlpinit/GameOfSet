@@ -136,23 +136,6 @@ public class DeckTest {
     }
 
     @Test
-    public void test_possible_sets() {
-        Deck deck = new Deck();
-        Card one = new Card(Color.Red, Shape.Oval, Filling.Empty, 1, deck);
-        Card two = new Card(Color.Red, Shape.Oval, Filling.Empty, 2, deck);
-        Card three = new Card(Color.Red, Shape.Oval, Filling.Empty, 3, deck);
-        Card four = new Card(Color.Red, Shape.Oval, Filling.Striped, 2, deck);
-        Card five = new Card(Color.Red, Shape.Oval, Filling.Full, 2, deck);
-        ArrayList<Card> cards = deck.getFlippedCards();
-        cards.add(one);
-        cards.add(two);
-        cards.add(three);
-        cards.add(four);
-        cards.add(five);
-        assertEquals(2, deck.getPossibleSetsCount());
-    }
-
-    @Test
     public void test_has_more_cards() {
         Deck deck = Deck.create();
         assertTrue(deck.hasMoreCards());
