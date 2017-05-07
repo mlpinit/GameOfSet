@@ -3,6 +3,8 @@ This is a basic implementation of the popular game of [Set](https://goo.gl/uyBVM
 
 If you want to play the game you can download it [here](https://github.com/mlpinit/GameOfSet/blob/master/dist/GameOfSet-20170407.jar).
 
+For mac, you can also just download the "app" version [here](https://github.com/mlpinit/GameOfSet/blob/master/GameOfSet.zip). This is just a wrapper around the application so you can drop it in the Dock if you would like.
+
 ![Game Of Set Screenshot](/screenshot.png)
 
 Outline:
