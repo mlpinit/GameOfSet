@@ -23,7 +23,6 @@ public class Card {
         this.lightImageLocation = toString() + "L" + ".png";
     }
 
-
     public URL getImageURL() {
         return getClass().getResource(getImageLocation());
     }

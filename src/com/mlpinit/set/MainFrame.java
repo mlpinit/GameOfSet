@@ -47,7 +47,7 @@ public class MainFrame extends JFrame {
     public void nextThreeCards() {
         // only attempt to flip cards when a set is selected
         if (deck.incompleteSet()) return;
-        if (deck.isValid()) {
+        if (SetValidator.isValid(deck.getSelectedCards())) {
             deck.flipCards();
             infoPanel.updatePossibleSetsLabel(deck.getPossibleSetsCount());
             infoPanel.updateSetsCount(deck.getSetsCount());
@@ -77,13 +77,11 @@ public class MainFrame extends JFrame {
         if (deck.getPossibleSetsCount() == 0) {
             JOptionPane.showMessageDialog(this, "No sets available.");
         } else {
-            deck.clearSelected();
+            // deck.clearSelected();
             ArrayList<Card> cards = deck.getPossibleSet();
-            ActionListener action = new ActionListener()
-            {   
+            ActionListener action = new ActionListener() {   
                 @Override
-                public void actionPerformed(ActionEvent event)
-                {
+                public void actionPerformed(ActionEvent event) {
                     timer.stop();
                     updateHintDisplay(cards);
                 }
