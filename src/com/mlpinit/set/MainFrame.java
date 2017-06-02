@@ -21,6 +21,8 @@ public class MainFrame extends JFrame {
     private final CardsPanel cardsPanel;
     private final InfoPanel infoPanel;
 
+    private SetFinder setFinder;
+
     private Timer timer;
 
     public final Deck deck;
@@ -38,10 +40,11 @@ public class MainFrame extends JFrame {
         this.add(infoPanel, BorderLayout.SOUTH);
         this.setVisible(true);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-
         deck.populateFlippedCards();
+
+        this.setFinder = new SetFinder(deck.getFlippedCards());
         cardsPanel.updateDisplay(deck.getFlippedCards());
-        infoPanel.updatePossibleSetsLabel(deck.getPossibleSetsCount());
+        infoPanel.updatePossibleSetsLabel(setFinder.possibleSetsSize());
     }
 
     public void nextThreeCards() {
@@ -49,9 +52,10 @@ public class MainFrame extends JFrame {
         if (deck.incompleteSet()) return;
         if (SetValidator.isValid(deck.getSelectedCards())) {
             deck.flipCards();
-            infoPanel.updatePossibleSetsLabel(deck.getPossibleSetsCount());
+            setFinder.findPossibleSets(deck.getFlippedCards());
+            infoPanel.updatePossibleSetsLabel(setFinder.possibleSetsSize());
             infoPanel.updateSetsCount(deck.getSetsCount());
-            if (deck.gameEnded()) {
+            if (!deck.hasMoreCards() && setFinder.possibleSetsSize() == 0) {
                 JOptionPane.showMessageDialog(this, endGameMessage);
             }
         } else {
@@ -68,17 +72,18 @@ public class MainFrame extends JFrame {
             JOptionPane.showMessageDialog(this, "Maximum 15 cards at a time.");
         } else {
             deck.flipThreeMoreCards();
+            setFinder.findPossibleSets(deck.getFlippedCards());
             cardsPanel.updateDisplay(deck.getFlippedCards());
-            infoPanel.updatePossibleSetsLabel(deck.getPossibleSetsCount());
+            infoPanel.updatePossibleSetsLabel(setFinder.possibleSetsSize());
         }
     }
 
     public void showHint() {
-        if (deck.getPossibleSetsCount() == 0) {
+        if (setFinder.possibleSetsSize() == 0) {
             JOptionPane.showMessageDialog(this, "No sets available.");
         } else {
-            // deck.clearSelected();
-            ArrayList<Card> cards = deck.getPossibleSet();
+            deck.clearSelected();
+            ArrayList<Card> cards = setFinder.getRandomSet();
             ActionListener action = new ActionListener() {   
                 @Override
                 public void actionPerformed(ActionEvent event) {

@@ -5,7 +5,6 @@ import java.util.ArrayList;
 
 public class Deck {
     private ArrayList<Card> flippedCards = new ArrayList<Card>(16);
-    private ArrayList<ArrayList<Card>> possibleSets = new ArrayList<ArrayList<Card>>();
 
     private static final int MAX_CARDS = 81; // 81 cards in a game of set.
     private final int START_CARDS = 12; // 12 cards flipped in the first round.
@@ -46,7 +45,6 @@ public class Deck {
 
     public void populateFlippedCards() {
         for (int i = 0; i < START_CARDS; i++) flippedCards.add(nextCard());
-        identifyPossibleSets();
     }
 
     public void add(Card card) {
@@ -65,15 +63,6 @@ public class Deck {
             cards[i] = two;
             cards[positionTwo] = one;
         }
-    }
-
-    public int getPossibleSetsCount() {
-        return possibleSets.size();
-    }
-
-    public ArrayList<Card> getPossibleSet() {
-        int randomSetIndex = Misc.randomIntInRange(0, possibleSets.size() - 1);
-        return possibleSets.get(randomSetIndex);
     }
 
     public Card nextCard() {
@@ -105,16 +94,10 @@ public class Deck {
                 flippedCards.remove(card);
             }
         }
-        identifyPossibleSets();
     }
 
     public void flipThreeMoreCards() {
         for (int i = 0; i < 3; i++) flippedCards.add(nextCard());
-        identifyPossibleSets();
-    }
-
-    public boolean gameEnded() {
-        return getPossibleSetsCount() == 0 && !this.hasMoreCards();
     }
 
     public boolean cardFlippingNotAllowed() {
@@ -135,20 +118,4 @@ public class Deck {
         return cards;
     }
 
-    private void identifyPossibleSets() {
-        possibleSets.clear();
-        for (int i = 0; i < flippedCards.size() - 2; i++) {
-            for (int j = i + 1; j < flippedCards.size() - 1; j++) {
-                for (int k = j + 1; k < flippedCards.size(); k++) {
-                    if (SetValidator.isValid(flippedCards.get(i), flippedCards.get(j), flippedCards.get(k))) {
-                        ArrayList<Card> set = new ArrayList<Card>(3);
-                        set.add(flippedCards.get(i));
-                        set.add(flippedCards.get(j));
-                        set.add(flippedCards.get(k));
-                        possibleSets.add(set);
-                    }
-                }
-            }
-        }
-    }
 }

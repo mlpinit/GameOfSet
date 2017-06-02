@@ -93,14 +93,6 @@ public class DeckTest {
     }
 
     @Test
-    public void test_game_ended() {
-        Deck deck = Deck.create();
-        assertFalse(deck.gameEnded());
-        while (deck.nextCard() != null);
-        assertTrue(deck.gameEnded());
-    }
-
-    @Test
     public void test_incomplete_set() {
         Deck deck = Deck.create();
         deck.populateFlippedCards();
