@@ -15,13 +15,13 @@ import java.util.concurrent.TimeUnit;
 import java.lang.Thread;
 
 public class MainFrame extends JFrame {
-
     private final String endGameMessage = "Congratulations! You have finished the game!";
     private final String invalidSetWarning = "That is not a valid set.";
     private final CardsPanel cardsPanel;
     private final InfoPanel infoPanel;
 
     private SetFinder setFinder;
+    private SetBoard setBoard;
 
     private Timer timer;
 
@@ -40,40 +40,40 @@ public class MainFrame extends JFrame {
         this.add(infoPanel, BorderLayout.SOUTH);
         this.setVisible(true);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        deck.populateFlippedCards();
+        this.setBoard = new SetBoard(deck);
+        this.setFinder = new SetFinder(setBoard.getFlippedCards());
 
-        this.setFinder = new SetFinder(deck.getFlippedCards());
-        cardsPanel.updateDisplay(deck.getFlippedCards());
+        cardsPanel.updateDisplay(setBoard.getFlippedCards());
         infoPanel.updatePossibleSetsLabel(setFinder.possibleSetsSize());
     }
 
     public void nextThreeCards() {
         // only attempt to flip cards when a set is selected
-        if (deck.incompleteSet()) return;
-        if (SetValidator.isValid(deck.getSelectedCards())) {
-            deck.flipCards();
-            setFinder.findPossibleSets(deck.getFlippedCards());
+        if (setBoard.isSetIncomplete()) return;
+        if (SetValidator.isValid(setBoard.getSelectedCards())) {
+            setBoard.flipCards();
+            setFinder.findPossibleSets(setBoard.getFlippedCards());
             infoPanel.updatePossibleSetsLabel(setFinder.possibleSetsSize());
-            infoPanel.updateSetsCount(deck.getSetsCount());
+            infoPanel.updateSetsCount(setBoard.getSetsCount());
             if (!deck.hasMoreCards() && setFinder.possibleSetsSize() == 0) {
                 JOptionPane.showMessageDialog(this, endGameMessage);
             }
         } else {
             JOptionPane.showMessageDialog(this, invalidSetWarning);
-            deck.clearSelected();
+            setBoard.clearSelectedCards();
         }
-        cardsPanel.updateDisplay(deck.getFlippedCards());
+        cardsPanel.updateDisplay(setBoard.getFlippedCards());
     }
 
     public void flipThreeMoreCards() {
         if (!deck.hasMoreCards()) {
             JOptionPane.showMessageDialog(this, "No cards left.");
-        } else if (deck.cardFlippingNotAllowed()) {
+        } else if (setBoard.cardFlippingNotAllowed()) {
             JOptionPane.showMessageDialog(this, "Maximum 15 cards at a time.");
         } else {
-            deck.flipThreeMoreCards();
-            setFinder.findPossibleSets(deck.getFlippedCards());
-            cardsPanel.updateDisplay(deck.getFlippedCards());
+            setBoard.flipThreeMoreCards();
+            setFinder.findPossibleSets(setBoard.getFlippedCards());
+            cardsPanel.updateDisplay(setBoard.getFlippedCards());
             infoPanel.updatePossibleSetsLabel(setFinder.possibleSetsSize());
         }
     }
@@ -82,7 +82,7 @@ public class MainFrame extends JFrame {
         if (setFinder.possibleSetsSize() == 0) {
             JOptionPane.showMessageDialog(this, "No sets available.");
         } else {
-            deck.clearSelected();
+            setBoard.clearSelectedCards();
             ArrayList<Card> cards = setFinder.getRandomSet();
             ActionListener action = new ActionListener() {   
                 @Override
@@ -107,8 +107,7 @@ public class MainFrame extends JFrame {
     private void updateHintDisplay(ArrayList<Card> cards) {
         for (Card card : cards) {
             card.toggleSelection();
-            cardsPanel.updateDisplay(deck.getFlippedCards());
+            cardsPanel.updateDisplay(setBoard.getFlippedCards());
         }
     }
-
 }
