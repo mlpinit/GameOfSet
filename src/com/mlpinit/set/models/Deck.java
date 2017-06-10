@@ -43,7 +43,7 @@ public class Deck {
     public void shuffle() {
         for (int i = 0; i < cards.length - 1; i++) {
             Card one = cards[i];
-            int positionTwo = Misc.randomIntInRange(0, cards.length - 1);
+            int positionTwo = Misc.randomIntInRange(i, cards.length - 1);
             Card two = cards[positionTwo];
             cards[i] = two;
             cards[positionTwo] = one;
