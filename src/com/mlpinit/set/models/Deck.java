@@ -50,6 +50,14 @@ public class Deck {
         }
     }
 
+    public void restart() {
+        shuffle();
+        for (Card card : cards) {
+            card.unselect();
+        }
+        this.index = 0;
+    }
+
     public Card nextCard() {
         if (index != size) return cards[index++];
         else return null;

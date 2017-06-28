@@ -48,6 +48,10 @@ public class Card {
         this.selected = !selected;
     }
 
+    public void unselect() {
+        this.selected = false;
+    }
+
     public boolean getSelected() {
         return selected;
     }

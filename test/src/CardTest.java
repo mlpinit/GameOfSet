@@ -1,4 +1,4 @@
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 import org.junit.Test;
 
 import com.mlpinit.set.Card;
@@ -28,6 +28,15 @@ public class CardTest {
     @Test
     public void test_light_image_location() {
         assertEquals("/ROE2L.png", card.getLightImageLocation());
+    }
+
+    @Test
+    public void test_unslecte() {
+        card = new Card(Color.Red, Shape.Oval, Filling.Empty, 2, new Deck());
+        card.toggleSelection();
+        assertTrue(card.getSelected());
+        card.unselect();
+        assertFalse(card.getSelected());
     }
 
     @Test

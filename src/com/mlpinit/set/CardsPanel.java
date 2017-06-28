@@ -4,14 +4,21 @@ import java.awt.GridBagLayout;
 import java.awt.Color;
 import java.awt.GridBagConstraints;
 
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
 import javax.swing.JPanel;
+import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.BorderFactory;
+
 
 import java.util.ArrayList;
 
 public class CardsPanel extends JPanel {
 
     private MainFrame mainFrame;
+    private final String endGameMessage = "Congratulations! You have finished the game!";
 
     public CardsPanel(MainFrame frame) {
         this.mainFrame = frame;
@@ -37,8 +44,7 @@ public class CardsPanel extends JPanel {
                 constraints.gridx = j;
                 constraints.gridy = i;
                 CardButton button = new CardButton(cards.get(cardIndex), mainFrame);
-                GridBagLayout gridBagLayout = (GridBagLayout) this.getLayout();
-                gridBagLayout.setConstraints(button, constraints);
+                gridBagLayout().setConstraints(button, constraints);
                 this.add(button);
                 cardIndex++;
             }
@@ -47,4 +53,50 @@ public class CardsPanel extends JPanel {
         this.repaint();
     }
 
+    public void displayEndGame() {
+        this.removeAll();
+        this.setBackground(Color.gray);
+        this.setOpaque(true);
+
+        GridBagConstraints constraints = new GridBagConstraints();
+        constraints.anchor = GridBagConstraints.FIRST_LINE_START;
+        constraints.weightx = 1;
+        constraints.weighty = 1;
+        constraints.fill = GridBagConstraints.BOTH;
+
+        constraints.gridx = 0;
+        constraints.gridy = 0;
+        JLabel endGameMessageLabel = new JLabel(endGameMessage);
+        endGameMessageLabel.setHorizontalAlignment(JLabel.CENTER);
+        endGameMessageLabel.setBackground(Color.gray);
+        gridBagLayout().setConstraints(endGameMessageLabel, constraints);
+        this.add(endGameMessageLabel);
+
+        constraints.gridy = 1;
+        JButton newGameButton = new JButton("New Game");
+        gridBagLayout().setConstraints(newGameButton, constraints);
+        newGameButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                mainFrame.updatePanels();
+            }
+        });
+        this.add(newGameButton);
+
+        constraints.gridy = 2;
+        JButton exitGameButton = new JButton("Exit Game");
+        gridBagLayout().setConstraints(exitGameButton, constraints);
+        exitGameButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);
+            }
+        });
+        this.add(exitGameButton);
+
+        this.validate();
+        this.repaint();
+    }
+
+    private GridBagLayout gridBagLayout() {
+        return (GridBagLayout) this.getLayout();
+    }
 }

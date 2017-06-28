@@ -7,6 +7,7 @@ import com.mlpinit.set.Card;
 import com.mlpinit.set.Color;
 import com.mlpinit.set.Filling;
 import com.mlpinit.set.Shape;
+import com.mlpinit.set.Misc;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -91,4 +92,24 @@ public class DeckTest {
         assertEquals(set.size(), deck.size());
     }
 
+    @Test
+    public void test_restart() {
+        Deck deck = Deck.create();
+        while (deck.hasMoreCards()) {
+            Card card = deck.nextCard();
+            if (Misc.randomIntInRange(0, 1) == 0) {
+                card.toggleSelection();
+            }
+        }
+        deck.restart();
+        assertTrue(deck.hasMoreCards());
+        int selectedCardsCount = 0;
+        while (deck.hasMoreCards()) {
+            Card card = deck.nextCard();
+            if (card.getSelected()) {
+                selectedCardsCount++;
+            }
+        }
+        assertEquals(0, selectedCardsCount);
+    }
 }

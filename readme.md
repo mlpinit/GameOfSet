@@ -1,7 +1,7 @@
 # Introduction - Game Of Set
 This is a basic implementation of the popular game of [Set](https://goo.gl/uyBVMl) using java and the swing GUI.
 
-If you want to play the game you can download it [here](https://github.com/mlpinit/GameOfSet/blob/master/dist/GameOfSet-20170610.jar).
+If you want to play the game you can download it [here](https://github.com/mlpinit/GameOfSet/blob/master/dist/GameOfSet-20170628.jar).
 
 For mac, you can also just download the "app" version [here](https://github.com/mlpinit/GameOfSet/blob/master/GameOfSet.zip). This is just a wrapper around the application so you can drop it in the Dock if you would like.
 
@@ -36,8 +36,8 @@ Check the build.xml file for more details.
 List of some potentially useful todos:
 
 * Handle the unlikely scenario where there is no set in 15 cards.
-* At the end of the game, add a button on the message dialog to allow for a
-  restart.
+* ~~At the end of the game, add a button on the message dialog to allow for a
+  restart.~~
 * ~~Create better looking cards for the game.~~
 * Display the time it took to finish the game at the end of the game.
 * Pause button

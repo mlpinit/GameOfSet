@@ -15,7 +15,6 @@ import java.util.concurrent.TimeUnit;
 import java.lang.Thread;
 
 public class MainFrame extends JFrame {
-    private final String endGameMessage = "Congratulations! You have finished the game!";
     private final String invalidSetWarning = "That is not a valid set.";
     private final CardsPanel cardsPanel;
     private final InfoPanel infoPanel;
@@ -43,8 +42,7 @@ public class MainFrame extends JFrame {
         this.setBoard = new SetBoard(deck);
         this.setFinder = new SetFinder(setBoard.getFlippedCards());
 
-        cardsPanel.updateDisplay(setBoard.getFlippedCards());
-        infoPanel.updatePossibleSetsLabel(setFinder.possibleSetsSize());
+        updatePanels();
     }
 
     public void nextThreeCards() {
@@ -53,10 +51,16 @@ public class MainFrame extends JFrame {
         if (SetValidator.isValid(setBoard.getSelectedCards())) {
             setBoard.flipCards();
             setFinder.findPossibleSets(setBoard.getFlippedCards());
-            infoPanel.updatePossibleSetsLabel(setFinder.possibleSetsSize());
-            infoPanel.updateSetsCount(setBoard.getSetsCount());
-            if (!deck.hasMoreCards() && setFinder.possibleSetsSize() == 0) {
-                JOptionPane.showMessageDialog(this, endGameMessage);
+            if (isGameOver()) {
+                deck.restart();
+                this.setBoard = new SetBoard(deck);
+                this.setFinder = new SetFinder(setBoard.getFlippedCards());
+                cardsPanel.displayEndGame();
+                infoPanel.updateSetsCount(0);
+                return;
+            } else {
+                infoPanel.updatePossibleSetsLabel(setFinder.possibleSetsSize());
+                infoPanel.updateSetsCount(setBoard.getSetsCount());
             }
         } else {
             JOptionPane.showMessageDialog(this, invalidSetWarning);
@@ -98,16 +102,26 @@ public class MainFrame extends JFrame {
         }
     }
 
-    public static void main(String[] args) {
-        Deck deck = Deck.create();
-        deck.shuffle();
-        new MainFrame(deck);
-    }
-
     private void updateHintDisplay(ArrayList<Card> cards) {
         for (Card card : cards) {
             card.toggleSelection();
             cardsPanel.updateDisplay(setBoard.getFlippedCards());
         }
     }
+
+    public boolean isGameOver() {
+        return !deck.hasMoreCards() && setFinder.possibleSetsSize() == 0;
+    }
+
+    public void updatePanels() {
+        cardsPanel.updateDisplay(setBoard.getFlippedCards());
+        infoPanel.updatePossibleSetsLabel(setFinder.possibleSetsSize());
+    }
+
+    public static void main(String[] args) {
+        Deck deck = Deck.create();
+        deck.shuffle();
+        new MainFrame(deck);
+    }
+
 }
