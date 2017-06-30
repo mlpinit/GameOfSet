@@ -3,6 +3,7 @@ package com.mlpinit.set;
 import java.awt.GridBagLayout;
 import java.awt.Color;
 import java.awt.GridBagConstraints;
+import java.awt.Font;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -67,6 +68,7 @@ public class CardsPanel extends JPanel {
         constraints.gridx = 0;
         constraints.gridy = 0;
         JLabel endGameMessageLabel = new JLabel(endGameMessage);
+        endGameMessageLabel.setFont(new Font("Arial", Font.BOLD, 20));
         endGameMessageLabel.setHorizontalAlignment(JLabel.CENTER);
         endGameMessageLabel.setBackground(Color.gray);
         gridBagLayout().setConstraints(endGameMessageLabel, constraints);
