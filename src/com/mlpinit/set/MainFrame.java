@@ -56,7 +56,7 @@ public class MainFrame extends JFrame {
                 this.setBoard = new SetBoard(deck);
                 this.setFinder = new SetFinder(setBoard.getFlippedCards());
                 cardsPanel.displayEndGame();
-                infoPanel.updateSetsCount(0);
+                infoPanel.displayEndGameLayout();
                 return;
             } else {
                 infoPanel.updatePossibleSetsLabel(setFinder.possibleSetsSize());
@@ -115,7 +115,10 @@ public class MainFrame extends JFrame {
 
     public void updatePanels() {
         cardsPanel.updateDisplay(setBoard.getFlippedCards());
+        infoPanel.displayRegularLayout();
         infoPanel.updatePossibleSetsLabel(setFinder.possibleSetsSize());
+        infoPanel.updatePossibleSetsLabel(setFinder.possibleSetsSize());
+        infoPanel.updateSetsCount(setBoard.getSetsCount());
     }
 
     public static void main(String[] args) {

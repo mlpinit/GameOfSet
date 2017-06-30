@@ -24,7 +24,9 @@ public class InfoPanel extends JPanel {
 
     public InfoPanel(MainFrame frame) {
         this.mainFrame = frame;
+    }
 
+    public void displayRegularLayout() {
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.anchor = GridBagConstraints.FIRST_LINE_START;
         constraints.weightx = 1;
@@ -53,6 +55,13 @@ public class InfoPanel extends JPanel {
         this.hintButton = createHintButton();
         gridBagLayout.setConstraints(hintButton, constraints);
         this.add(hintButton);
+    }
+
+    public void displayEndGameLayout() {
+        this.removeAll();
+        this.setBackground(Color.gray);
+        this.validate();
+        this.repaint();
     }
 
     public void updatePossibleSetsLabel(int possibleSets) {
