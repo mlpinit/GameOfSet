@@ -30,6 +30,10 @@ public class SetBoardTest {
         SetBoard setBoard = new SetBoard(deck);
         assertFalse(setBoard.cardFlippingNotAllowed());
         setBoard.flipThreeMoreCards();
+        assertFalse(setBoard.cardFlippingNotAllowed());
+        setBoard.flipThreeMoreCards();
+        assertFalse(setBoard.cardFlippingNotAllowed());
+        setBoard.flipThreeMoreCards();
         assertTrue(setBoard.cardFlippingNotAllowed());
     }
 

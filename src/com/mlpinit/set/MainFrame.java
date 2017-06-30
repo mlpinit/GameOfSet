@@ -16,6 +16,9 @@ import java.lang.Thread;
 
 public class MainFrame extends JFrame {
     private final String invalidSetWarning = "That is not a valid set.";
+    private final String maxFlippedCardsMessage = "Maximum " +
+        SetBoard.MAX_CARDS + " cards at a time.";
+
     private final CardsPanel cardsPanel;
     private final InfoPanel infoPanel;
 
@@ -67,18 +70,20 @@ public class MainFrame extends JFrame {
             setBoard.clearSelectedCards();
         }
         cardsPanel.updateDisplay(setBoard.getFlippedCards());
+        this.setSize(frameWidth(), 780);
     }
 
     public void flipThreeMoreCards() {
         if (!deck.hasMoreCards()) {
             JOptionPane.showMessageDialog(this, "No cards left.");
         } else if (setBoard.cardFlippingNotAllowed()) {
-            JOptionPane.showMessageDialog(this, "Maximum 15 cards at a time.");
+            JOptionPane.showMessageDialog(this, maxFlippedCardsMessage);
         } else {
             setBoard.flipThreeMoreCards();
             setFinder.findPossibleSets(setBoard.getFlippedCards());
             cardsPanel.updateDisplay(setBoard.getFlippedCards());
             infoPanel.updatePossibleSetsLabel(setFinder.possibleSetsSize());
+            this.setSize(frameWidth(), 780);
         }
     }
 
@@ -127,4 +132,7 @@ public class MainFrame extends JFrame {
         new MainFrame(deck);
     }
 
+    private int frameWidth() {
+        return 600 + (setBoard.getFlippedCardsCount() - 12) / 3 * 150;
+    }
 }

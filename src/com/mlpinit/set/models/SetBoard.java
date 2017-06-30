@@ -3,6 +3,8 @@ package com.mlpinit.set;
 import java.util.ArrayList;
 
 public class SetBoard {
+    public static final int MAX_CARDS = 21;
+
     private final int START_CARDS = 12; // 12 cards flipped in the first round.
 
     private int setsCount;
@@ -14,6 +16,10 @@ public class SetBoard {
         this.deck = deck;
         this.setsCount = 0;
         populateFlippedCards();
+    }
+
+    public int getFlippedCardsCount() {
+        return flippedCards.size();
     }
 
     public void populateFlippedCards() {
@@ -65,6 +71,6 @@ public class SetBoard {
     }
 
     public boolean cardFlippingNotAllowed() {
-        return flippedCards.size() == 15;
+        return flippedCards.size() == SetBoard.MAX_CARDS;
     }
 }
