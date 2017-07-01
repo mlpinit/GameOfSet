@@ -23,7 +23,7 @@ public class MainFrame extends JFrame {
     private final InfoPanel infoPanel;
 
     private SetFinder setFinder;
-    private SetBoard setBoard;
+    public SetBoard setBoard;
 
     private Timer timer;
 
@@ -45,21 +45,18 @@ public class MainFrame extends JFrame {
         this.setBoard = new SetBoard(deck);
         this.setFinder = new SetFinder(setBoard.getFlippedCards());
 
+        if (noPossibleSets()) {
+            flipThreeMoreCards();
+        }
         updatePanels();
     }
 
     public void nextThreeCards() {
-        // only attempt to flip cards when a set is selected
-        if (setBoard.isSetIncomplete()) return;
-        if (SetValidator.isValid(setBoard.getSelectedCards())) {
+        if (validSet()) {
             setBoard.flipCards();
             setFinder.findPossibleSets(setBoard.getFlippedCards());
             if (isGameOver()) {
-                deck.restart();
-                this.setBoard = new SetBoard(deck);
-                this.setFinder = new SetFinder(setBoard.getFlippedCards());
-                cardsPanel.displayEndGame();
-                infoPanel.displayEndGameLayout();
+                endGame();
                 return;
             } else {
                 infoPanel.updatePossibleSetsLabel(setFinder.possibleSetsSize());
@@ -71,6 +68,9 @@ public class MainFrame extends JFrame {
         }
         cardsPanel.updateDisplay(setBoard.getFlippedCards());
         this.setSize(frameWidth(), 780);
+        if (noPossibleSets()) {
+            flipThreeMoreCards();
+        }
     }
 
     public void flipThreeMoreCards() {
@@ -84,6 +84,9 @@ public class MainFrame extends JFrame {
             cardsPanel.updateDisplay(setBoard.getFlippedCards());
             infoPanel.updatePossibleSetsLabel(setFinder.possibleSetsSize());
             this.setSize(frameWidth(), 780);
+        }
+        if (isGameOver()) {
+            endGame();
         }
     }
 
@@ -126,13 +129,29 @@ public class MainFrame extends JFrame {
         infoPanel.updateSetsCount(setBoard.getSetsCount());
     }
 
+    private int frameWidth() {
+        return Math.max(600, 600 + (setBoard.getFlippedCardsCount() - 12) / 3 * 150);
+    }
+    
+    private boolean noPossibleSets() {
+        return setFinder.possibleSetsSize() == 0;
+    }
+
+    private boolean validSet() {
+        return SetValidator.isValid(setBoard.getSelectedCards());
+    }
+
+    private void endGame() {
+        deck.restart();
+        this.setBoard = new SetBoard(deck);
+        this.setFinder = new SetFinder(setBoard.getFlippedCards());
+        cardsPanel.displayEndGame();
+        infoPanel.displayEndGameLayout();
+    }
+
     public static void main(String[] args) {
         Deck deck = Deck.create();
         deck.shuffle();
         new MainFrame(deck);
-    }
-
-    private int frameWidth() {
-        return 600 + (setBoard.getFlippedCardsCount() - 12) / 3 * 150;
     }
 }

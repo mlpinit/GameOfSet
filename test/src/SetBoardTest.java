@@ -15,13 +15,13 @@ public class SetBoardTest {
         Card card1 = setBoard.getFlippedCards().get(0);
         Card card2 = setBoard.getFlippedCards().get(1);
         Card card3 = setBoard.getFlippedCards().get(2);
-        assertTrue(setBoard.isSetIncomplete());
+        assertTrue(!setBoard.isSetComplete());
         card1.toggleSelection();
-        assertTrue(setBoard.isSetIncomplete());
+        assertTrue(!setBoard.isSetComplete());
         card2.toggleSelection();
-        assertTrue(setBoard.isSetIncomplete());
+        assertTrue(!setBoard.isSetComplete());
         card3.toggleSelection();
-        assertFalse(setBoard.isSetIncomplete());
+        assertFalse(!setBoard.isSetComplete());
     }
 
     @Test
@@ -54,7 +54,7 @@ public class SetBoardTest {
         for (Card card : setBoard.getFlippedCards()) flippedCards.add(card);
         for (int i = 0; i < 3; i++) flippedCards.get(i).toggleSelection();
         setBoard.flipCards();
-        assertTrue(setBoard.isSetIncomplete()); // test selected was cleared
+        assertTrue(!setBoard.isSetComplete()); // test selected was cleared
         assertEquals(1, setBoard.getSetsCount()); // test sets count was increased
         // test that only three cards were replaced
         int diff = 0;
@@ -76,7 +76,7 @@ public class SetBoardTest {
         for (int i = 0; i < 3; i++) flippedCards.get(i).toggleSelection();
         assertEquals(15, setBoard.getFlippedCards().size());
         setBoard.flipCards();
-        assertTrue(setBoard.isSetIncomplete()); // test selected was cleared
+        assertTrue(!setBoard.isSetComplete()); // test selected was cleared
         assertEquals(1, setBoard.getSetsCount()); // test sets count was increased
         assertEquals(12, setBoard.getFlippedCards().size());
    }

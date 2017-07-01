@@ -24,7 +24,9 @@ public class CardButton extends JButton {
             public void actionPerformed(ActionEvent e) {
                 card.toggleSelection();
                 setIcon(new ImageIcon(card.getImageURL()));
-                mainFrame.nextThreeCards();
+                if (mainFrame.setBoard.isSetComplete()) {
+                    mainFrame.nextThreeCards();
+                }
             }
         });
     }

@@ -40,8 +40,8 @@ public class SetBoard {
         for (int i = 0; i < 3; i++) flippedCards.add(deck.nextCard());
     }
 
-    public boolean isSetIncomplete() {
-        return getSelectedCards().size() != 3;
+    public boolean isSetComplete() {
+        return getSelectedCards().size() == 3;
     }
 
     public void clearSelectedCards() {
