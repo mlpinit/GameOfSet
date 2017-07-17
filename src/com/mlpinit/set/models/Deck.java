@@ -26,7 +26,7 @@ public class Deck {
         return deck;
     }
 
-    public Deck() {
+    protected Deck() {
         this.cards = new Card[MAX_CARDS];
         this.index = 0;
         this.size = 0;
