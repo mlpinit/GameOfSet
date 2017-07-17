@@ -18,7 +18,7 @@ public class Deck {
             for (Shape shape : Shape.values()) {
                 for (Filling filling : Filling.values()) {
                     for (int count = 1; count <= 3; count++) {
-                        deck.add(new Card(color, shape, filling, count, deck));
+                        deck.add(new Card(color, shape, filling, count));
                     }
                 }
             }

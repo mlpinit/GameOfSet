@@ -17,9 +17,9 @@ public class DeckTest {
     @Test
     public void test_add_card() {
         Deck deck = new Deck();
-        Card one = new Card(Color.Red, Shape.Oval, Filling.Empty, 1, deck);
-        Card eight = new Card(Color.Red, Shape.Oval, Filling.Full, 1, deck);
-        Card nine = new Card(Color.Red, Shape.Oval, Filling.Full, 1, deck);
+        Card one = new Card(Color.Red, Shape.Oval, Filling.Empty, 1);
+        Card eight = new Card(Color.Red, Shape.Oval, Filling.Full, 1);
+        Card nine = new Card(Color.Red, Shape.Oval, Filling.Full, 1);
         deck.add(one);
         assertEquals(1, deck.size());
         deck.add(eight);
@@ -31,9 +31,9 @@ public class DeckTest {
     @Test
     public void test_shuffle() {
         Deck deck = new Deck();
-        Card one = new Card(Color.Red, Shape.Oval, Filling.Empty, 1, deck);
-        Card eight = new Card(Color.Red, Shape.Oval, Filling.Full, 1, deck);
-        Card nine = new Card(Color.Red, Shape.Oval, Filling.Full, 1, deck);
+        Card one = new Card(Color.Red, Shape.Oval, Filling.Empty, 1);
+        Card eight = new Card(Color.Red, Shape.Oval, Filling.Full, 1);
+        Card nine = new Card(Color.Red, Shape.Oval, Filling.Full, 1);
         deck.add(one);
         deck.add(eight);
         deck.add(nine);
@@ -47,7 +47,7 @@ public class DeckTest {
     public void test_next_card() {
         Deck deck = new Deck();
         assertEquals(null, deck.nextCard());
-        Card one = new Card(Color.Red, Shape.Oval, Filling.Empty, 1, deck);
+        Card one = new Card(Color.Red, Shape.Oval, Filling.Empty, 1);
         deck.add(one);
         assertEquals(one, deck.nextCard());
     }

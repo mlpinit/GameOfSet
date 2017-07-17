@@ -3,7 +3,6 @@ package com.mlpinit.set;
 import java.net.URL;
 
 public class Card {
-    private Deck deck;
     private Shape shape;
     private Filling filling;
     private Color color;
@@ -12,8 +11,7 @@ public class Card {
     private String darkImageLocation;
     private String lightImageLocation;
 
-    public Card(Color color, Shape shape, Filling filling, int count, Deck deck) {
-        this.deck = deck;
+    public Card(Color color, Shape shape, Filling filling, int count) {
         this.shape = shape;
         this.color = color;
         this.filling = filling;

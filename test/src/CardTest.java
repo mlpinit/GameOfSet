@@ -2,7 +2,6 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import com.mlpinit.set.Card;
-import com.mlpinit.set.Deck;
 import com.mlpinit.set.Color;
 import com.mlpinit.set.Filling;
 import com.mlpinit.set.Shape;
@@ -12,7 +11,7 @@ public class CardTest {
     private Card card;
 
     public CardTest() {
-        card = new Card(Color.Red, Shape.Oval, Filling.Empty, 2, new Deck());
+        card = new Card(Color.Red, Shape.Oval, Filling.Empty, 2);
     }
 
     @Test
@@ -32,7 +31,7 @@ public class CardTest {
 
     @Test
     public void test_unslecte() {
-        card = new Card(Color.Red, Shape.Oval, Filling.Empty, 2, new Deck());
+        card = new Card(Color.Red, Shape.Oval, Filling.Empty, 2);
         card.toggleSelection();
         assertTrue(card.getSelected());
         card.unselect();
