@@ -36,10 +36,6 @@ public class Deck {
         cards[size++] = card;
     }
 
-    public int size() {
-        return size;
-    }
-
     public void shuffle() {
         for (int i = 0; i < cards.length - 1; i++) {
             Card one = cards[i];

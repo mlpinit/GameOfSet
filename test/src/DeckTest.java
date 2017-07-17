@@ -15,17 +15,6 @@ import java.util.Set;
 public class DeckTest {
 
     @Test
-    public void test_cards_are_unique_after_shuffle() {
-        Deck deck = Deck.create();
-        deck.shuffle();
-        Set<Card> set = new HashSet<Card>();
-        for (Card card = deck.nextCard(); card != null; card = deck.nextCard()) {
-            set.add(card);
-        }
-        assertEquals(set.size(), deck.size());
-    }
-
-    @Test
     public void test_has_more_cards() {
         Deck deck = Deck.create();
         assertTrue(deck.hasMoreCards());
@@ -41,17 +30,11 @@ public class DeckTest {
     @Test
     public void test_create() {
         Deck deck = Deck.create();
-        assertEquals(81, deck.size());
-    }
-
-    @Test
-    public void test_create_unique_cards() {
-        Deck deck = Deck.create();
-        Set<Card> set = new HashSet<Card>();
-        for (Card card = deck.nextCard(); card != null; card = deck.nextCard()) {
-            set.add(card);
+        int size = 0;
+        while (deck.nextCard() != null) {
+            size++;
         }
-        assertEquals(set.size(), deck.size());
+        assertEquals(81, size);
     }
 
     @Test
