@@ -25,14 +25,6 @@ public class Card {
         return getClass().getResource(getImageLocation());
     }
 
-    public String getDarkImageLocation() {
-        return darkImageLocation;
-    }
-
-    public String getLightImageLocation() {
-        return lightImageLocation;
-    }
-
     public int numValue() {
         int value = 0;
         value = value * 10 + (color.getValue() + 1);

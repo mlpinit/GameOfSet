@@ -20,13 +20,8 @@ public class CardTest {
     }
 
     @Test
-    public void test_dark_image_location() {
-        assertEquals("/ROE2D.png", card.getDarkImageLocation());
-    }
-
-    @Test
-    public void test_light_image_location() {
-        assertEquals("/ROE2L.png", card.getLightImageLocation());
+    public void test_string_representation() {
+        assertEquals("/ROE2", card.toString());
     }
 
     @Test
