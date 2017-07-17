@@ -32,12 +32,12 @@ public class Deck {
         this.size = 0;
     }
 
-    public int size() {
-        return size;
+    protected void add(Card card) {
+        cards[size++] = card;
     }
 
-    public void add(Card card) {
-        cards[size++] = card;
+    public int size() {
+        return size;
     }
 
     public void shuffle() {
